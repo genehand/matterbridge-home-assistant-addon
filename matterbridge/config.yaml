@@ -20,6 +20,7 @@ options:
   include_patterns: []
   exclude_domains: []
   exclude_patterns: []
+  plugins: []
 schema:
   include_domains:
     - str?
@@ -28,4 +29,6 @@ schema:
   exclude_domains:
     - str?
   exclude_patterns:
+    - str?
+  plugins:
     - str?

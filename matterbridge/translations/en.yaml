@@ -22,3 +22,7 @@ configuration:
       List of glob patterns to exclude entities (e.g. media_player.*echo*).
       Even included entities need to NOT match this patterns.
       If empty, no entity is excluded.
+  plugins:
+    name: Plugins
+    description: |
+      Additional Matterbridge plugins to install.

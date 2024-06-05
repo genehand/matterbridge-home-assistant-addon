@@ -25,5 +25,23 @@ export HOME_ASSISTANT_URL
 export HOME_ASSISTANT_ACCESS_TOKEN
 export HOME_ASSISTANT_CLIENT_CONFIG
 
+# Install user configured plugins
+if bashio::config.has_value 'plugins'; then
+    bashio::log.info "Starting installation of custom NPM plugins..."
+    for package in $(bashio::config 'plugins'); do
+        npmlist+=("$package")
+    done
+
+    # install all packages together
+    npm install -g --loglevel=verbose \
+        "${npmlist[@]}" \
+           || bashio::exit.nok "Failed to install a specified npm package"
+
+    # then register each one
+    for package in $(bashio::config 'plugins'); do
+        npm run matterbridge -- -add $package
+    done
+fi
+
 npm run matterbridge -- -add ./node_modules/matterbridge-home-assistant
-npm run matterbridge -- -bridge
+npm run matterbridge -- -bridge -docker
