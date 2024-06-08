@@ -39,7 +39,7 @@ if bashio::config.has_value 'plugins'; then
 
     # then register each one
     for package in $(bashio::config 'plugins'); do
-        npm run matterbridge -- -add $package
+        npm run matterbridge -- -add "$package"
     done
 fi
 
