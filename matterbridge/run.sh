@@ -33,13 +33,13 @@ if bashio::config.has_value 'plugins'; then
     done
 
     # install all packages together
-    npm install -g --loglevel=verbose \
+    npm install --loglevel=verbose \
         "${npmlist[@]}" \
            || bashio::exit.nok "Failed to install a specified npm package"
 
     # then register each one
     for package in $(bashio::config 'plugins'); do
-        npm run matterbridge -- -add "$package"
+        npm run matterbridge -- -add "./node_modules/$package"
     done
 fi
 
